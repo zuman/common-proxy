@@ -1,0 +1,21 @@
+version: '3.9'
+services:
+
+  nginx:
+    image: nginx:alpine
+    restart: always
+    ports:
+      - "80:80"
+    volumes:
+      - ./proxy:/etc/nginx/conf.d/
+    networks:
+      - proxy-network
+
+  memcached:
+    image: memcached
+    networks:
+      - proxy-network
+
+networks:
+  proxy-network:
+    external: true
