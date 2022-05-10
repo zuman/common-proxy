@@ -12,6 +12,7 @@ services:
 
   memcached:
     image: memcached
+    restart: always
     networks:
       - proxy-network
 
