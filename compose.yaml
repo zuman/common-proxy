@@ -1,0 +1,34 @@
+services:
+
+  nginx:
+    image: nginx:alpine
+    restart: always
+    ports:
+      - "80:80"
+    volumes:
+      - ./proxy:/etc/nginx/conf.d/
+      - ./certbot/conf:/etc/nginx/ssl
+      - ./certbot/www:/var/www/certbot
+    networks:
+      - proxy-network
+      - cert-network
+  
+  certbot:
+    image: certbot/certbot:latest
+    networks:
+      - cert-network
+    volumes:
+      - ./certbot/conf:/etc/letsencrypt
+      - ./certbot/www:/var/www/certbot
+
+  memcached:
+    image: memcached
+    restart: always
+    networks:
+      - proxy-network
+
+networks:
+  proxy-network:
+    external: true
+  cert-network:
+    external: false
