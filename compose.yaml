@@ -5,21 +5,22 @@ services:
     restart: always
     ports:
       - "80:80"
+      - "443:443"
     volumes:
       - ./proxy:/etc/nginx/conf.d/
-      - ./certbot/conf:/etc/nginx/ssl
-      - ./certbot/www:/var/www/certbot
+      - ./certbot/conf:/etc/letsencrypt:ro
+      - ./certbot/www:/var/www/certbot:ro
     networks:
       - proxy-network
       - cert-network
   
   certbot:
-    image: certbot/certbot:latest
+    image: certbot/certbot:arm64v8-latest
     networks:
       - cert-network
     volumes:
-      - ./certbot/conf:/etc/letsencrypt
-      - ./certbot/www:/var/www/certbot
+      - ./certbot/conf:/etc/letsencrypt:rw
+      - ./certbot/www:/var/www/certbot:rw
 
   memcached:
     image: memcached

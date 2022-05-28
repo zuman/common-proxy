@@ -1,17 +1,21 @@
 # common-proxy
-Common proxy for multiple websites on single server
+Common proxy for multiple websites on single server, with HTTPS enabled
 
-## Run before docker compose up:
+## Steps
 
+1. Create / Edit .conf files in proxy directory.
+2. Create an attachable network
 ```
 docker network create --attachable proxy-network
 ```
-
-## Install certificates from [Let's Encrypt](https://letsencrypt.org/):
-
+3. Create the stack
 ```
-sudo snap install core; sudo snap refresh core
-sudo snap install --classic certbot
-sudo ln -s /snap/bin/certbot /usr/bin/certbot
-sudo certbot --nginx
+docker compose build
+docker compose up -d
 ```
+4. Dry run the certbot
+```
+docker compose run --rm  certbot certonly --webroot --webroot-path /var/www/certbot/ --dry-run
+```
+> In case of error, remove ":arm64v8-latest" in line #17 of compose.yaml file.
+5. Create the certificates by removing --dry-run from above command.
