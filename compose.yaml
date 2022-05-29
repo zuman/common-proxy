@@ -3,6 +3,7 @@ services:
   nginx:
     image: nginx:alpine
     restart: always
+    command: "/bin/sh -c 'while :; do sleep 8d & wait $${!}; nginx -s reload; done & nginx -g \"daemon off;\"'"
     ports:
       - "80:80"
       - "443:443"
@@ -16,6 +17,7 @@ services:
   
   certbot:
     image: certbot/certbot:arm64v8-latest
+    entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 8d & wait $${!}; done;'"
     networks:
       - cert-network
     volumes:
