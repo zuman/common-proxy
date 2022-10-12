@@ -1,3 +1,4 @@
 certbot
 
-*.zuman.conf
+*.conf
+!zuman.conf
