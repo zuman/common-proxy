@@ -10,6 +10,7 @@ docker network create --attachable proxy-network
 ```
 3. Run the stack
 ```
+docker compose down
 docker compose up -d
 ```
 4. Dry run the certbot
