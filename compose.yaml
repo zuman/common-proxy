@@ -14,9 +14,9 @@ services:
     networks:
       - proxy-network
       - cert-network
-  
+
   certbot:
-    image: certbot/certbot:arm64v8-latest
+    image: certbot/certbot
     entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep $RENEW_CHECK & wait $${!}; done;'"
     networks:
       - cert-network
