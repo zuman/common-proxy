@@ -17,5 +17,5 @@ docker compose up -d
 ```
 docker compose run --entrypoint certbot --rm  certbot certonly --webroot --webroot-path /var/www/certbot/ --agree-tos -n -m <YOUR_EMAIL> -d <DOMAIN> --dry-run
 ```
-> In case of error, remove ":arm64v8-latest" in <b>certbot > image</b> section of compose.yaml file.
+> In case you are using arm processor, add "arm64v8-latest" tag in <b>certbot > image</b> section of compose.yaml file.
 5. Create the certificates by removing --dry-run from above command.
