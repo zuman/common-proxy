@@ -14,7 +14,6 @@ services:
     networks:
       - proxy-network
       - cert-network
-      - nextcloud-aio
 
   certbot:
     image: certbot/certbot
@@ -36,5 +35,3 @@ networks:
     external: true
   cert-network:
     external: false
-  nextcloud-aio:
-    external: true
