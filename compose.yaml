@@ -13,7 +13,7 @@ services:
       - ./certbot/conf:/etc/letsencrypt:ro
       - ./certbot/www:/var/www/certbot:ro
     networks:
-      - proxy-network
+      - nextcloud-aio
 
   certbot:
     image: certbot/certbot
@@ -21,8 +21,6 @@ services:
     depends_on:
       - nginx
     entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep $RENEW_CHECK & wait $${!}; done;'"
-    networks:
-      - proxy-network
     volumes:
       - ./certbot/conf:/etc/letsencrypt:rw
       - ./certbot/www:/var/www/certbot:rw
@@ -30,9 +28,7 @@ services:
   memcached:
     image: memcached
     restart: always
-    networks:
-      - proxy-network
 
 networks:
-  proxy-network:
+  nextcloud-aio:
     external: true
