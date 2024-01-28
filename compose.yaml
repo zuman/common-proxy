@@ -12,8 +12,6 @@ services:
       - ./proxy:/etc/nginx/conf.d/
       - ./certbot/conf:/etc/letsencrypt:ro
       - ./certbot/www:/var/www/certbot:ro
-    networks:
-      - nextcloud-aio
 
   certbot:
     image: certbot/certbot
@@ -28,7 +26,3 @@ services:
   memcached:
     image: memcached
     restart: always
-
-networks:
-  nextcloud-aio:
-    external: true
