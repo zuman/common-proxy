@@ -22,7 +22,3 @@ services:
     volumes:
       - ./certbot/conf:/etc/letsencrypt:rw
       - ./certbot/www:/var/www/certbot:rw
-
-  memcached:
-    image: memcached
-    restart: always
