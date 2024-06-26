@@ -30,3 +30,16 @@ Common proxy for multiple websites on single server, with HTTPS enabled
         common-proxy_default:
             external: true
         ```
+
+## Extras
+
+* To view status of all certificates:
+
+    ```
+    docker compose run --entrypoint certbot --rm  certbot certificates
+    ```
+
+* To delete a certificate:
+    ```
+    docker compose run --entrypoint certbot --rm  certbot delete --cert-name <CERTIFICATE>
+    ```
