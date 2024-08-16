@@ -36,7 +36,7 @@ Common proxy for multiple websites on single server, with HTTPS enabled
 * To view status of all certificates:
 
     ```
-    docker compose run --entrypoint certbot --rm  certbot certificates
+    docker compose run --entrypoint certbot --rm  certbot certificates | grep "Domains" -A1
     ```
 
 * To delete a certificate:
