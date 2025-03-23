@@ -5,3 +5,4 @@ certbot
 *.conf
 *.conf.bak
 !zuman.conf
+.htpasswd
